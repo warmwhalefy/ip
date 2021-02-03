@@ -5,6 +5,7 @@ public class Duke {
     static String sectionDivider = "____________________________________________________________";
     public static void main(String[] args) {
         Task[] TaskArray = new Task[100];
+        Task newItem = null;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -28,7 +29,8 @@ public class Duke {
                 System.out.println("Here are the tasks in your to-do list:");
                 System.out.println(TaskArray[0].getStatusIcon());
                 for(int i= 1; i!=noOfTasks+1; i++){
-                    System.out.println(i + ". [" + TaskArray[i-1].getStatusIcon() + " ]" + TaskArray[i-1].getDescription());
+                    System.out.println(i + "." + TaskArray[i-1].toString());
+                    //System.out.println(i + ". [" + TaskArray[i-1].getStatusIcon() + " ]" + TaskArray[i-1].getDescription());
                 }
                 System.out.println(sectionDivider);
             }
@@ -42,11 +44,57 @@ public class Duke {
                 System.out.println(sectionDivider);
             } else {
                 System.out.println(sectionDivider);
-                Task t = new Task(str);
-                TaskArray[noOfTasks] = t;
-                noOfTasks = noOfTasks + 1;
-                System.out.println("added: " + str);
-                System.out.println(sectionDivider);
+                String[] splitInput = str.split(" ");
+                if (splitInput[0].equals("deadline")) {
+                    int wordsCount = splitInput.length;
+                    String descriptionString = "";
+                    String byString = "";
+                    int byIndex = 0;
+                    for (int i = 1; i != wordsCount; i++) {
+                        if (splitInput[i] != "/by") {
+                            descriptionString = descriptionString + splitInput[i] + " ";
+                        } else {
+                            byIndex = i + 1;
+                        }
+                    }
+                    while (byIndex != wordsCount) {
+                        byString = byString + splitInput[byIndex] + " ";
+                        byIndex++;
+                    }
+                    newItem = new Deadline(descriptionString, byString);
+                    TaskArray[noOfTasks] = newItem;
+                    noOfTasks = noOfTasks + 1;
+                }
+                if (splitInput[0].equals("event")) {
+                    int wordsCount = splitInput.length;
+                    String descriptionString = "";
+                    String atString = "";
+                    int byIndex = 0;
+                    for (int i = 1; i != wordsCount; i++) {
+                        if (splitInput[i] != "/at") {
+                            descriptionString = descriptionString + splitInput[i] + " ";
+                        } else {
+                            byIndex = i + 1;
+                        }
+                    }
+                    while (byIndex != wordsCount) {
+                        atString = atString + splitInput[byIndex] + " ";
+                        byIndex++;
+                    }
+                    newItem = new Deadline(descriptionString, atString);
+                    TaskArray[noOfTasks] = newItem;
+                    noOfTasks = noOfTasks + 1;
+                }
+                if (splitInput[0].equals("todo")) {
+                    int wordsCount = splitInput.length;
+                    String descriptionString = "";
+                    for (int i = 1; i != wordsCount; i++) {
+                        descriptionString = descriptionString + splitInput[i] + " ";
+                    }
+                    newItem = new Todo(descriptionString);
+                    TaskArray[noOfTasks] = newItem;
+                    noOfTasks = noOfTasks + 1;
+                }
             }
         }
     }

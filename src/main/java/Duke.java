@@ -47,7 +47,6 @@ public class Duke {
                 noOfTasks = noOfTasks + 1;
                 System.out.println("added: " + str);
                 System.out.println(sectionDivider);
-                continue;
             }
         }
     }

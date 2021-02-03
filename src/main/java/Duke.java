@@ -23,9 +23,17 @@ public class Duke {
                 System.out.println(sectionDivider);
                 break;
             }
+            if (str.equals("list")){
+                System.out.println(sectionDivider);
+                for(int i= 1; i!=noOfTasks+1; i++){
+                    System.out.println(i + "." + StringArray[i-1]);
+                }
+                System.out.println(sectionDivider);
+            }
             else {
                 System.out.println(sectionDivider);
                 StringArray[noOfTasks]= str;
+                noOfTasks = noOfTasks + 1;
                 System.out.println("added: " + str);
                 System.out.println(sectionDivider);
                 continue;

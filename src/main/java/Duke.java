@@ -4,7 +4,7 @@ public class Duke {
     static int noOfTasks = 0;
     static String sectionDivider = "____________________________________________________________";
     public static void main(String[] args) {
-        Task TaskArray[] = new Task[100];
+        Task[] TaskArray = new Task[100];
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -40,8 +40,7 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(taskNumber + ". [" + TaskArray[taskNumber-1].getStatusIcon() + " ]" + TaskArray[taskNumber-1].getDescription());
                 System.out.println(sectionDivider);
-            }
-            else {
+            } else {
                 System.out.println(sectionDivider);
                 Task t = new Task(str);
                 TaskArray[noOfTasks] = t;
@@ -51,6 +50,5 @@ public class Duke {
                 continue;
             }
         }
-
     }
 }

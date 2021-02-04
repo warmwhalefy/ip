@@ -27,10 +27,8 @@ public class Duke {
             if (str.equals("list")){
                 System.out.println(sectionDivider);
                 System.out.println("Here are the tasks in your to-do list:");
-                System.out.println(TaskArray[0].getStatusIcon());
                 for(int i= 1; i!=noOfTasks+1; i++){
                     System.out.println(i + "." + TaskArray[i-1].toString());
-                    //System.out.println(i + ". [" + TaskArray[i-1].getStatusIcon() + " ]" + TaskArray[i-1].getDescription());
                 }
                 System.out.println(sectionDivider);
             }
@@ -62,9 +60,6 @@ public class Duke {
                         byString = byString + splitInput[byIndex] + " ";
                         byIndex++;
                     }
-                    //System.out.println("printing results:");
-                    //System.out.println(descriptionString);
-                    //System.out.println(byString);
                     newItem = new Deadline(descriptionString, byString);
                     TaskArray[noOfTasks] = newItem;
                     noOfTasks = noOfTasks + 1;
@@ -111,6 +106,9 @@ public class Duke {
                     System.out.println(TaskArray[noOfTasks - 1].toString());
                     System.out.println("Now you have " + noOfTasks + " tasks in the list.");
                     System.out.println(sectionDivider);
+                }
+                else{
+                    System.out.println("invalid input!");
                 }
             }
         }

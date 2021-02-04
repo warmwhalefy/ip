@@ -51,39 +51,52 @@ public class Duke {
                     String byString = "";
                     int byIndex = 0;
                     for (int i = 1; i != wordsCount; i++) {
-                        if (splitInput[i] != "/by") {
-                            descriptionString = descriptionString + splitInput[i] + " ";
-                        } else {
+                        if (splitInput[i].equals("/by")) {
                             byIndex = i + 1;
+                            break;
+                        } else {
+                            descriptionString = descriptionString + splitInput[i] + " ";
                         }
                     }
                     while (byIndex != wordsCount) {
                         byString = byString + splitInput[byIndex] + " ";
                         byIndex++;
                     }
+                    //System.out.println("printing results:");
+                    //System.out.println(descriptionString);
+                    //System.out.println(byString);
                     newItem = new Deadline(descriptionString, byString);
                     TaskArray[noOfTasks] = newItem;
                     noOfTasks = noOfTasks + 1;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(TaskArray[noOfTasks - 1].toString());
+                    System.out.println("Now you have " + noOfTasks + " tasks in the list.");
+                    System.out.println(sectionDivider);
                 }
                 if (splitInput[0].equals("event")) {
                     int wordsCount = splitInput.length;
                     String descriptionString = "";
                     String atString = "";
-                    int byIndex = 0;
+                    int atIndex = 0;
                     for (int i = 1; i != wordsCount; i++) {
-                        if (splitInput[i] != "/at") {
-                            descriptionString = descriptionString + splitInput[i] + " ";
+                        if (splitInput[i].equals("/at")) {
+                            atIndex = i + 1;
+                            break;
                         } else {
-                            byIndex = i + 1;
+                            descriptionString = descriptionString + splitInput[i] + " ";
                         }
                     }
-                    while (byIndex != wordsCount) {
-                        atString = atString + splitInput[byIndex] + " ";
-                        byIndex++;
+                    while (atIndex != wordsCount) {
+                        atString = atString + splitInput[atIndex] + " ";
+                        atIndex++;
                     }
-                    newItem = new Deadline(descriptionString, atString);
+                    newItem = new Event(descriptionString, atString);
                     TaskArray[noOfTasks] = newItem;
                     noOfTasks = noOfTasks + 1;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(TaskArray[noOfTasks - 1].toString());
+                    System.out.println("Now you have " + noOfTasks + " tasks in the list.");
+                    System.out.println(sectionDivider);
                 }
                 if (splitInput[0].equals("todo")) {
                     int wordsCount = splitInput.length;
@@ -94,6 +107,10 @@ public class Duke {
                     newItem = new Todo(descriptionString);
                     TaskArray[noOfTasks] = newItem;
                     noOfTasks = noOfTasks + 1;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(TaskArray[noOfTasks - 1].toString());
+                    System.out.println("Now you have " + noOfTasks + " tasks in the list.");
+                    System.out.println(sectionDivider);
                 }
             }
         }

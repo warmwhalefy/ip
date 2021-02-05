@@ -107,9 +107,6 @@ public class Duke {
                     System.out.println("Now you have " + noOfTasks + " tasks in the list.");
                     System.out.println(sectionDivider);
                 }
-                else{
-                    System.out.println("invalid input!");
-                }
             }
         }
     }

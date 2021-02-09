@@ -23,12 +23,4 @@ public class Task {
         return "[" + getStatusIcon() + "] " + this.description;
     }
 
-    public boolean isDescriptionEmpty() {
-        if (description.isEmpty()){
-            System.out.println("OOPS!!! The description cannot be empty.");
-            return true;
-        }
-        return false;
-    }
-
 }

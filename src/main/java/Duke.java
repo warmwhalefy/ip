@@ -16,7 +16,6 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("Please type tasks to do OR (list) to list all the tasks OR (bye) to exit.");
         Scanner sc= new Scanner(System.in);
-
         while (true) {
             String str = sc.nextLine();
             if (str.equals("bye")) {

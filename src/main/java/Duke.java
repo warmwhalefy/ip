@@ -16,6 +16,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke");
         System.out.println("Please type tasks to do OR (list) to list all the tasks OR (bye) to exit.");
         Scanner sc= new Scanner(System.in);
+
         while (true) {
             String str = sc.nextLine();
             if (str.equals("bye")) {
@@ -61,12 +62,16 @@ public class Duke {
                         byIndex++;
                     }
                     newItem = new Deadline(descriptionString, byString);
+                    if (newItem.isDescriptionEmpty()){
+                        continue;
+                    }
                     TaskArray[noOfTasks] = newItem;
                     noOfTasks = noOfTasks + 1;
                     System.out.println("Got it. I've added this task:");
                     System.out.println(TaskArray[noOfTasks - 1].toString());
                     System.out.println("Now you have " + noOfTasks + " tasks in the list.");
                     System.out.println(sectionDivider);
+                    continue;
                 }
                 if (splitInput[0].equals("event")) {
                     int wordsCount = splitInput.length;
@@ -86,12 +91,16 @@ public class Duke {
                         atIndex++;
                     }
                     newItem = new Event(descriptionString, atString);
+                    if (newItem.isDescriptionEmpty()){
+                        continue;
+                    }
                     TaskArray[noOfTasks] = newItem;
                     noOfTasks = noOfTasks + 1;
                     System.out.println("Got it. I've added this task:");
                     System.out.println(TaskArray[noOfTasks - 1].toString());
                     System.out.println("Now you have " + noOfTasks + " tasks in the list.");
                     System.out.println(sectionDivider);
+                    continue;
                 }
                 if (splitInput[0].equals("todo")) {
                     int wordsCount = splitInput.length;
@@ -100,14 +109,23 @@ public class Duke {
                         descriptionString = descriptionString + splitInput[i] + " ";
                     }
                     newItem = new Todo(descriptionString);
+                    if (newItem.isDescriptionEmpty()){
+                        continue;
+                    }
                     TaskArray[noOfTasks] = newItem;
                     noOfTasks = noOfTasks + 1;
                     System.out.println("Got it. I've added this task:");
                     System.out.println(TaskArray[noOfTasks - 1].toString());
                     System.out.println("Now you have " + noOfTasks + " tasks in the list.");
                     System.out.println(sectionDivider);
+                    continue;
+                }
+                else{
+                    System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
             }
         }
     }
+
+
 }

@@ -1,15 +1,16 @@
 package duke;
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
     public static boolean isInvalidInput = false;
     static int noOfTasks = 0;
     static String sectionDivider = "____________________________________________________________";
+    private static ArrayList<Task> TaskArray = new ArrayList<>();
 
     public static void main(String[] args) {
-        Task[] TaskArray = new Task[100];
-        Task newItem = null;
+        //Task[] TaskArray = new Task[100];
+        //Task newItem = null;
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -49,6 +50,10 @@ public class Duke {
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(taskNumber + ". [" + TaskArray[taskNumber - 1].getStatusIcon() + " ]" + TaskArray[taskNumber - 1].getDescription());
                 System.out.println(sectionDivider);
+            }
+            if (userInput.contains("delete")) {
+                System.out.println("in");
+                deleteTask(userInput);
             } else {
                 System.out.println(sectionDivider);
                 String[] splitInput = userInput.split(" ");
@@ -151,11 +156,36 @@ public class Duke {
                 isInvalidInput = false;
             }
         } else if (userInput.contains("list")
-                || userInput.contains("bye")) {
+                || userInput.contains("bye") || userInput.contains("delete")) {
             isInvalidInput = false;
         } else {
             isInvalidInput = true;
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static void deleteTask(String userInput) {
+        userInput = userInput.replaceAll("[^0-9]", "");
+        System.out.println(userInput);
+        try {
+            int taskNo = Integer.parseInt(userInput);
+            System.out.println(taskNo);
+            System.out.println(noOfTasks);
+
+            if (taskNo > noOfTasks) {
+                System.out.println("You only have " + noOfTasks + " task(s)!");
+            } else {
+                System.out.println("Noted. I've removed this task: " + System.lineSeparator() + TaskArray.get(2 - 1));
+                TaskArray.remove(2 - 1);
+                System.out.println("Now you have " + noOfTasks + " tasks in the list.");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid Input! Input format should have an integer e.g. done 2");
+        } //catch (IndexOutOfBoundsException e) {
+            //System.out.println("Invalid Input! Integer cannot be 0!");
+        //}
+        finally {
+            System.out.println(sectionDivider);
         }
     }
 }

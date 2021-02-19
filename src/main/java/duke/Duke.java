@@ -58,6 +58,7 @@ public class Duke {
             }
             try {
                 updateFile(Path.of(fileName));
+                System.out.println("updated file");
             } catch (IOException e) {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
@@ -228,6 +229,7 @@ public class Duke {
 
     public static int sayBye(String bye) {
         if (bye.toLowerCase().contains("bye")) {
+            System.out.println(SECTION_DIVIDER);
             System.out.println("Bye. Hope to see you again soon!");
             System.out.println(SECTION_DIVIDER);
             return 1;

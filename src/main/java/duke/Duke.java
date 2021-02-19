@@ -1,6 +1,11 @@
 package duke;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.io.File;
 
 public class Duke {
     public static final int INDEX_TODO = 5;
@@ -20,6 +25,20 @@ public class Duke {
         System.out.println("Hello! I'm Duke.");
         System.out.println("What can I do for you?");
         System.out.println(SECTION_DIVIDER);
+        String fileName = "testing.txt";
+
+        try {
+            File myObj = new File("testing.txt");
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            } else {
+                System.out.println("File already exists.");
+                loadFile("testing.txt");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
 
         Scanner scan = new Scanner(System.in);
         String userInput;
@@ -37,11 +56,66 @@ public class Duke {
             } else {
                 addTaskToArray(userInput);
             }
+            try {
+                updateFile(Path.of(fileName));
+            } catch (IOException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
             userInput = getUserInput(scan);
             while (invalidInput) {
                 userInput = getUserInput(scan);
             }
         }
+    }
+
+    private static void loadFile(String fileName) throws NoSuchFileException, IOException {
+        Scanner s = new Scanner(Path.of(fileName)); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String fileInput = s.nextLine();
+            if (fileInput.contains("[T]")) {
+                addTodoFromFile(fileInput);
+            } else if (fileInput.contains("[E]")) {
+                addEventFromFile(fileInput);
+            } else if (fileInput.contains("[D]")) {
+                addDeadlineFromFile(fileInput);
+            }
+        }
+        viewTasks(TaskArray);
+    }
+
+    private static void addDeadlineFromFile(String fileInput) {
+        int byIndex = fileInput.indexOf("(by:");
+        Deadline deadlineAdded = new Deadline(fileInput.substring(7, byIndex), fileInput.substring(byIndex + 5, fileInput.indexOf(")")));
+        TaskArray.add(deadlineAdded);
+        if (fileInput.contains("X")) {
+            TaskArray.get(TaskArray.size() - 1).markAsDone();
+        }
+    }
+
+    private static void addEventFromFile(String fileInput) {
+        int byIndex = fileInput.indexOf("(at:");
+        Event eventAdded = new Event(fileInput.substring(7, byIndex), fileInput.substring(byIndex + 5, fileInput.indexOf(")")));
+        TaskArray.add(eventAdded);
+        if (fileInput.contains("X")) {
+            TaskArray.get(TaskArray.size() - 1).markAsDone();
+        }
+    }
+
+    private static void addTodoFromFile(String fileInput) {
+        Todo todoAdded = new Todo(fileInput.substring(7));
+        TaskArray.add(todoAdded);
+        if (fileInput.contains("X")) {
+            TaskArray.get(TaskArray.size() - 1).markAsDone();
+        }
+    }
+
+    private static void updateFile(Path filePath) throws IOException {
+        FileWriter fw = new FileWriter(String.valueOf(filePath));
+        for (Task t : TaskArray) {
+            fw.write(t.toString() + System.lineSeparator());
+        }
+        fw.write("There are a total of " + TaskArray.size() + " tasks in the list.");
+        fw.close();
     }
 
     public static String getUserInput(Scanner scan) {
@@ -64,7 +138,6 @@ public class Duke {
         }
         return userInput;
     }
-
 
     public static void addTaskToArray(String userInput) {
         Task taskAdded = null;

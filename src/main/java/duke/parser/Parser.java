@@ -1,5 +1,6 @@
-package duke.command;
+package duke.parser;
 
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -36,7 +37,8 @@ public class Parser {
         } else if (userInput.contains(KEYWORD_LIST)
                 || userInput.contains(KEYWORD_BYE)
                 || userInput.contains(KEYWORD_DONE)
-                || userInput.contains(KEYWORD_DELETE)) {
+                || userInput.contains(KEYWORD_DELETE)
+                || userInput.contains("find")) {
             isInvalidInput = false;
         } else {
             isInvalidInput = true;
@@ -80,6 +82,8 @@ public class Parser {
             return new DoneCommand();
         } else if (userInput.contains(KEYWORD_DELETE)) {
             return new DeleteCommand();
+        } else if (userInput.contains("find")) {
+            return new FindCommand();
         } else if (userInput.contains(KEYWORD_BYE)) {
             return new ByeCommand();
         } else if (!userInput.contains(KEYWORD_BYE)) {
@@ -130,5 +134,10 @@ public class Parser {
             throw new DukeException("Invalid Input! Input format should have an integer!");
         }
         return taskNo;
+    }
+
+    public static String findKeyword(String userInput) {
+        int descriptionIndex = userInput.indexOf("find") + 5;
+        return userInput.substring(descriptionIndex).trim().toLowerCase();
     }
 }

@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.parser.Parser;
+
 import java.nio.file.Path;
 
 public class DeleteCommand extends Command {

@@ -1,8 +1,11 @@
-package duke.command;
+package duke.ui;
+
+import duke.command.DukeException;
+import duke.parser.Parser;
 
 import java.util.Scanner;
 import static duke.Duke.SECTION_DIVIDER;
-import static duke.command.Parser.KEYWORD_BYE;
+import static duke.parser.Parser.KEYWORD_BYE;
 
 public class Ui {
     private static final String logo = " ____        _        \n"

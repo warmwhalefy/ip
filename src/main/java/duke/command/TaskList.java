@@ -88,4 +88,13 @@ public class TaskList {
         System.out.println(SECTION_DIVIDER);
     }
 
+    public ArrayList<Task> findTasks(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task t : arrayOfTasks) {
+            if (t.toString().toLowerCase().contains(keyword)) {
+                foundTasks.add(t);
+            }
+        }
+        return foundTasks;
+    }
 }

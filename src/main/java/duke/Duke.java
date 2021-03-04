@@ -1,6 +1,9 @@
 package duke;
 
 import duke.command.*;
+import duke.parser.Parser;
+import duke.ui.Ui;
+
 import java.nio.file.Path;
 
 public class Duke {

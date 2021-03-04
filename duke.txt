@@ -1,0 +1,5 @@
+[T][X] sleep
+[D][ ] ticket  (by: tpday)
+[T][ ] sleep properly
+[T][X] sleepp
+There are a total of 4 tasks in the list.

@@ -58,6 +58,7 @@ public class Storage {
         }
     }
 
+    // adding task based on what is in text file
     public static void addTaskFromFile(String fileInput, String taskIcon, ArrayList<Task> arrayOfTasks) {
         switch (taskIcon) {
         case "[T]":

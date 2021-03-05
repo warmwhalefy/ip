@@ -25,10 +25,10 @@ Find task based on keywords
 ### deadline homework /by today 2359
 "deadline" will be added to the list.
 
-Example of usage: 
-
-`keyword (optional arguments)`
+Example of usage:
+"todo sleep"
 
 Expected outcome:
-
-`outcome`
+Got it. I've added this task:
+[T][ ] sleep
+Now you have 1 tasks in the list.

@@ -35,6 +35,7 @@ public class TaskList {
         return arrayOfTasks.get(index);
     }
 
+    //printing task after it is added
     private void printTaskAdded(Task taskAdded) {
         System.out.println("Got it. I've added this task:" + System.lineSeparator() + taskAdded);
         System.out.println("Now you have " + getNoOfTasks() + " tasks in the list.");
@@ -66,6 +67,7 @@ public class TaskList {
         }
     }
 
+    // printing out task that is marked done
     public void printTaskDone(int taskNo) {
         System.out.println("Nice! I have marked this task as done:" + getTaskFromIndex(taskNo - 1));
         System.out.println(SECTION_DIVIDER);

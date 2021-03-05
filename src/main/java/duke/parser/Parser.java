@@ -27,7 +27,7 @@ public class Parser {
 
     public static void handleErrorUserInputs(String userInput) throws DukeException {
         userInput = userInput.toLowerCase().trim();
-
+    //making sure user input is correct
         if (userInput.contains(KEYWORD_TODO) && !(userInput.contains(KEYWORD_EVENT)) && !(userInput.contains(KEYWORD_DEADLINE))) {
             validateTodo(userInput);
         } else if (userInput.contains(KEYWORD_EVENT) && !(userInput.contains(KEYWORD_TODO)) && !(userInput.contains(KEYWORD_DEADLINE))) {
@@ -42,11 +42,13 @@ public class Parser {
             isInvalidInput = false;
         } else {
             isInvalidInput = true;
+            //input is invalid, have to re-enter
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             System.out.println(SECTION_DIVIDER);
         }
     }
 
+    //ensure description and deadline is not empty
     private static void validateDeadline(String userInput) throws DukeException {
         if (userInput.substring(ADD_INDEX_TO_DEADLINE - 1).trim().isEmpty()
                 || !(userInput.contains("/by"))
@@ -57,6 +59,7 @@ public class Parser {
         }
     }
 
+    //ensure description and event location is not empty
     private static void validateEvent(String userInput) throws DukeException {
         if (userInput.substring(ADD_INDEX_TO_EVENT - 1).trim().isEmpty()
                 || !(userInput.contains("/at"))
@@ -67,6 +70,7 @@ public class Parser {
         }
     }
 
+    //ensure description is not empty
     private static void validateTodo(String userInput) throws DukeException {
         if (userInput.substring(ADD_INDEX_TO_TODO - 1).trim().isEmpty()) {
             throw new DukeException(TODO_ERROR);
@@ -75,6 +79,7 @@ public class Parser {
         }
     }
 
+    //different command for different keywords
     public static Command parseCommand(String userInput) throws DukeException {
         if (userInput.contains(KEYWORD_LIST)) {
             return new ListCommand();
@@ -93,6 +98,7 @@ public class Parser {
         }
     }
 
+    // to add task from input
     public static Task getTask(String userInput) {
         Task taskToAdd = null;
         if (userInput.contains(KEYWORD_DEADLINE)) {
@@ -122,6 +128,7 @@ public class Parser {
         return new Deadline(userInput.substring(descriptionIndex, byIndex-1), userInput.substring(byIndex + 4));
     }
 
+    //getting task
     public static int getTaskNo(String userInput) throws DukeException {
         userInput = userInput.replaceAll("[^0-9]", "");
         int taskNo;
